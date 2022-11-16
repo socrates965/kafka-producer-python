@@ -1,0 +1,7 @@
+version: '1'
+services:
+  web:
+    # container_name: kafka-producer-python
+    build: .
+    volumes:
+      - .:/app
