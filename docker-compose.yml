@@ -3,5 +3,7 @@ services:
   web:
     # container_name: kafka-producer-python
     build: .
+    env_file:
+      - .env
     volumes:
       - .:/app
