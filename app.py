@@ -3,13 +3,6 @@ import json
 import time
 from kafka import KafkaProducer
 
-#environment variable
-KAFKA_BOOTSTRAP_SERVER = os.environ.get('KAFKA_BOOTSTRAP_SERVER')
-KAFKA_USERNAME = os.environ.get('KAFKA_USERNAME')
-KAFKA_PASSWORD = os.environ.get('KAFKA_PASSWORD')
-KAFKA_TOPIC = os.environ.get('KAFKA_TOPIC')
-
-
 def produce_messages(start=1, end=100, delay=1):
     """Sends a number of messages in JSON format '{"txt": "hello 1"}'
 
@@ -25,7 +18,7 @@ def produce_messages(start=1, end=100, delay=1):
     KAFKA_TOPIC = os.getenv('KAFKA_TOPIC')
 
     # create the producer
-    producer = KafkaProducer(bootstrap_servers=[KAFKA_BOOTSTRAP_SERVER],
+    producer = KafkaProducer(bootstrap_servers=KAFKA_BOOTSTRAP_SERVER,
                              security_protocol='SASL_SSL',
                              sasl_mechanism='PLAIN',
                              sasl_plain_username=KAFKA_USERNAME,
