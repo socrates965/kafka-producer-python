@@ -30,7 +30,7 @@ def produce_messages(start=1, end=100, delay=1):
 
     # create the producer
     producer = KafkaProducer(bootstrap_servers=KAFKA_BOOTSTRAP_SERVER,
-                             security_protocol='SASL_SSL',
+                             security_protocol='SASL_PLAINTEXT',
                              sasl_mechanism='PLAIN',
                              sasl_plain_username=KAFKA_USERNAME,
                              sasl_plain_password=KAFKA_PASSWORD,
