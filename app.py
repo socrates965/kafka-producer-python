@@ -11,11 +11,17 @@ def produce_messages(start=1, end=100, delay=1):
     end -- last number to send (default 100)
     delay -- number of seconds between messages (default 1)
     """
-    #environment variable
+    #environment variable production
     KAFKA_BOOTSTRAP_SERVER = os.getenv('KAFKA_BOOTSTRAP_SERVER')
     KAFKA_USERNAME = os.getenv('KAFKA_USERNAME')
     KAFKA_PASSWORD = os.getenv('KAFKA_PASSWORD')
     KAFKA_TOPIC = os.getenv('KAFKA_TOPIC')
+
+    #environment variable dev
+    # KAFKA_BOOTSTRAP_SERVER = 'localhost:9092'
+    # KAFKA_USERNAME = 'admin'
+    # KAFKA_PASSWORD = 'admin-secret'
+    # KAFKA_TOPIC = 'orders'
 
     print("kafka server: ", KAFKA_BOOTSTRAP_SERVER)
     print("kafka username: ", KAFKA_USERNAME)
