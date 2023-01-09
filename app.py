@@ -29,7 +29,8 @@ def produce_messages(start=1, end=100, delay=1):
     print("KAFKA_USERNAME: ", KAFKA_USERNAME)
     print("KAFKA_PASSWORD: ", KAFKA_PASSWORD)
     print("KAFKA_TOPIC: ", KAFKA_TOPIC)
-    print("SECURITY_PROTOCOL: ", KAFKA_TOPIC)
+    print("SECURITY_PROTOCOL: ", SECURITY_PROTOCOL)
+    print("SASL_MECHANISM: ", SASL_MECHANISM)
 
     # create the producer
     producer = KafkaProducer(bootstrap_servers=KAFKA_BOOTSTRAP_SERVER,
