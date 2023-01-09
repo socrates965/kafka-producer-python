@@ -16,6 +16,8 @@ def produce_messages(start=1, end=100, delay=1):
     KAFKA_USERNAME = os.getenv('KAFKA_USERNAME')
     KAFKA_PASSWORD = os.getenv('KAFKA_PASSWORD')
     KAFKA_TOPIC = os.getenv('KAFKA_TOPIC')
+    SECURITY_PROTOCOL = os.getenv('SECURITY_PROTOCOL')
+    SASL_MECHANISM = os.getenv('SASL_MECHANISM')
 
     #environment variable dev
     # KAFKA_BOOTSTRAP_SERVER = 'localhost:9092'
@@ -23,15 +25,16 @@ def produce_messages(start=1, end=100, delay=1):
     # KAFKA_PASSWORD = 'admin-secret'
     # KAFKA_TOPIC = 'orders'
 
-    print("kafka server: ", KAFKA_BOOTSTRAP_SERVER)
-    print("kafka username: ", KAFKA_USERNAME)
-    print("kafka password: ", KAFKA_PASSWORD)
-    print("kafka topic: ", KAFKA_TOPIC)
+    print("KAFKA_BOOTSTRAP_SERVER: ", KAFKA_BOOTSTRAP_SERVER)
+    print("KAFKA_USERNAME: ", KAFKA_USERNAME)
+    print("KAFKA_PASSWORD: ", KAFKA_PASSWORD)
+    print("KAFKA_TOPIC: ", KAFKA_TOPIC)
+    print("SECURITY_PROTOCOL: ", KAFKA_TOPIC)
 
     # create the producer
     producer = KafkaProducer(bootstrap_servers=KAFKA_BOOTSTRAP_SERVER,
-                             security_protocol='SASL_PLAINTEXT',
-                             sasl_mechanism='PLAIN',
+                             security_protocol=SECURITY_PROTOCOL,
+                             sasl_mechanism=SASL_MECHANISM,
                              sasl_plain_username=KAFKA_USERNAME,
                              sasl_plain_password=KAFKA_PASSWORD,
                              api_version_auto_timeout_ms=30000,
