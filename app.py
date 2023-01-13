@@ -18,6 +18,7 @@ def produce_messages(start=1, end=100, delay=1):
     KAFKA_TOPIC = os.getenv('KAFKA_TOPIC')
     SECURITY_PROTOCOL = os.getenv('SECURITY_PROTOCOL')
     SASL_MECHANISM = os.getenv('SASL_MECHANISM')
+    SSL_CHECK_HOSTNAME = os.getenv('SSL_CHECK_HOSTNAME')
 
     #environment variable dev
     # KAFKA_BOOTSTRAP_SERVER = 'localhost:9092'
@@ -31,6 +32,7 @@ def produce_messages(start=1, end=100, delay=1):
     print("KAFKA_TOPIC: ", KAFKA_TOPIC)
     print("SECURITY_PROTOCOL: ", SECURITY_PROTOCOL)
     print("SASL_MECHANISM: ", SASL_MECHANISM)
+    print("SSL_CHECK_HOSTNAME: ", SSL_CHECK_HOSTNAME)
 
     # create the producer
     producer = KafkaProducer(bootstrap_servers=KAFKA_BOOTSTRAP_SERVER,
@@ -38,6 +40,7 @@ def produce_messages(start=1, end=100, delay=1):
                              sasl_mechanism=SASL_MECHANISM,
                              sasl_plain_username=KAFKA_USERNAME,
                              sasl_plain_password=KAFKA_PASSWORD,
+                             ssl_check_hostname=SSL_CHECK_HOSTNAME,
                              api_version_auto_timeout_ms=30000,
                              max_block_ms=900000,
                              request_timeout_ms=450000,
