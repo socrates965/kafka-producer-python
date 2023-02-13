@@ -1,9 +1,10 @@
 import os
 import json
 import time
+import datetime;
 from kafka import KafkaProducer
 
-def produce_messages(start=1, end=100, delay=1):
+def produce_messages(delay=1):
     """Sends a number of messages in JSON format '{"txt": "hello 1"}'
 
     Keyword arguments:
@@ -21,10 +22,14 @@ def produce_messages(start=1, end=100, delay=1):
     SSL_CHECK_HOSTNAME = os.getenv('SSL_CHECK_HOSTNAME')
 
     #environment variable dev
-    # KAFKA_BOOTSTRAP_SERVER = 'localhost:9092'
-    # KAFKA_USERNAME = 'admin'
-    # KAFKA_PASSWORD = 'admin-secret'
-    # KAFKA_TOPIC = 'orders'
+    # KAFKA_BOOTSTRAP_SERVER='kafka.apps.proddrc.customs.go.id:443'
+    # KAFKA_USERNAME='kafka'
+    # KAFKA_PASSWORD='kafka-secret'
+    # KAFKA_TOPIC='test'
+    # SECURITY_PROTOCOL='SASL_SSL'
+    # SASL_MECHANISM='PLAIN'
+    # SSL_CHECK_HOSTNAME=True
+    DEBUG=True
 
     print("KAFKA_BOOTSTRAP_SERVER: ", KAFKA_BOOTSTRAP_SERVER)
     print("KAFKA_USERNAME: ", KAFKA_USERNAME)
@@ -41,18 +46,17 @@ def produce_messages(start=1, end=100, delay=1):
                              sasl_plain_username=KAFKA_USERNAME,
                              sasl_plain_password=KAFKA_PASSWORD,
                              ssl_check_hostname=SSL_CHECK_HOSTNAME,
-                             api_version_auto_timeout_ms=30000,
                              max_block_ms=900000,
-                             request_timeout_ms=450000,
                              acks='all')
 
     # send messages
-    for x in range(start, end+1):
+    x=0
+    while True:
         time.sleep(delay)
-        jsonpayload = json.dumps({'txt': f'hello {x}'})
+        jsonpayload = json.dumps({'txt': f'hello {x}', 'datetime': datetime.datetime.now().isoformat()})
         print(f'sending {jsonpayload}')
         producer.send(KAFKA_TOPIC, jsonpayload.encode('utf-8'))
-
+        x=x+1
     producer.flush()  # Important, especially if message size is small
 
-produce_messages(1, 100, 2)
+produce_messages(2)
